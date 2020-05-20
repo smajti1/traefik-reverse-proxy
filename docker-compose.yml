@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  reverse-proxy:
+    image: traefik:v2.2
+    ports:
+      - "80:80"
+      - "443:443"
+      # The Web UI (dashboard etc.)
+      - "8080:8080"
+    volumes:
+      # mount traefik config
+      - ./${ENVIRONMENT}:/etc/traefik/:ro
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./letsencrypt:/letsencrypt
+      - ./certs:/certs:ro
+    networks:
+      - default
+
+# Make the externally created network "gateway" available as network "default"
+networks:
+  default:
+    external:
+      name: gateway
+

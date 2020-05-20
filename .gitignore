@@ -1,0 +1,5 @@
+.idea/
+.env
+certs/_wildcard.local.crt
+certs/_wildcard.local.key
+letsencrypt/

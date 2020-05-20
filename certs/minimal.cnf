@@ -1,0 +1,21 @@
+[req]
+distinguished_name=dn
+req_extensions=v3_req
+prompt = no
+
+[v3_req]
+basicConstraints=CA:TRUE,pathlen:0
+keyUsage = keyEncipherment, dataEncipherment
+extendedKeyUsage = serverAuth, clientAuth
+subjectAltName=@alt_names
+
+[alt_names]
+DNS.1 = *.local
+
+[dn]
+C = PL
+ST = masovian district
+L = Warsaw
+O = MyCompany
+OU = MyDivision
+CN = *.local

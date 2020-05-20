@@ -1,0 +1,9 @@
+tls:
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /certs/_wildcard.local.crt
+        keyFile: /certs/_wildcard.local.key
+  certificates:
+    - certFile: /certs/_wildcard.local.crt
+      keyFile: /certs/_wildcard.local.key

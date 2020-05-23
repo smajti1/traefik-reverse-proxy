@@ -1,3 +1,5 @@
+Revers proxy for many webpages see more on https://docs.traefik.io
+
 ## How to Start
 
     cp .env.example .env
@@ -9,6 +11,9 @@ Create the external network "gateway"
 Start docker container
 
     docker-compose -f docker-compose.prod.yml up --detach
+
+Add labels in docker compose file (see https://docs.traefik.io/routing/providers/docker)
+and restart your container
 
 ## Development
 

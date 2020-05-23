@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  reverse-proxy:
+    image: traefik:v2.2
+    command:
+#      - "--log.level=DEBUG"
+#      - "--accessLog=true"
+      - "--entryPoints.web.address=:80"
+      - "--entryPoints.websecure.address=:443"
+      - "--providers.docker.exposedByDefault=false"
+      - "--providers.docker.network=gateway"
+      - "--certificatesResolvers.myresolver.acme.httpchallenge=true"
+      - "--certificatesResolvers.myresolver.acme.httpchallenge.entrypoint=web"
+#      - "--certificatesResolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+      - "--certificatesResolvers.myresolver.acme.email=${EMAIL_ADDRESS}"
+      - "--certificatesResolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - "80:80"
+      - "443:443"
+      # The Web UI (dashboard etc.)
+#      - "8080:8080"
+    volumes:
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./letsencrypt:/letsencrypt
+      - ./certs:/certs:ro
+    networks:
+      - default
+
+# Make the externally created network "gateway" available as network "default"
+networks:
+  default:
+    external:
+      name: gateway
+

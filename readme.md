@@ -8,9 +8,11 @@ Create the external network "gateway"
 
 Start docker container
 
-    docker-compose up --detach
+    docker-compose -f docker-compose.prod.yml up --detach
 
 ## Development
+
+    docker-compose -f docker-compose.dev.yml up --detach
 
 ### create `*.local` private self-signed certificate files
 
